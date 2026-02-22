@@ -4,6 +4,9 @@
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
 
+# LLM providers
+langchain-groq>=0.2.0
+
 # LangGraph agent framework
 langgraph>=0.2.0
 langgraph-cli[inmem]
