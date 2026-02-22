@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Env
+.env
+
+# LangGraph local runtime artifacts
+.langgraph_api/
+
+# Local vector index cache (can be rebuilt)
+faiss_index/
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+
+# Logs / misc
+*.log

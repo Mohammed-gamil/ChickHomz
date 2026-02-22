@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chic Homz · نور — مستشارك الشخصي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — "Mamluk Modernism"
+   Midnight black · 24k Gold · Parchment cream · Islamic geometry
+═══════════════════════════════════════════════════════════════════ */
+:root {
+  --ink:       #08080E;
+  --ink2:      #111119;
+  --ink3:      #1A1A26;
+  --gold:      #C9921A;
+  --gold-lt:   #E8B84B;
+  --gold-dim:  rgba(201,146,26,0.15);
+  --gold-line: rgba(201,146,26,0.3);
+  --cream:     #F0E6CC;
+  --cream-dim: rgba(240,230,204,0.08);
+  --cream-mid: rgba(240,230,204,0.5);
+  --parch:     #D4C5A0;
+  --smoke:     rgba(255,255,255,0.04);
+  --r:         16px;
+  --r-lg:      24px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Noto Naskh Arabic', 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1000; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.6;
+}
+
+/* ── GEOMETRIC BACKGROUND ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 70% 20%, rgba(201,146,26,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 80%, rgba(201,146,26,0.04) 0%, transparent 50%);
+}
+
+/* ── MASHRABIYA PATTERN CANVAS ── */
+#mashrabiya {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.07;
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT
+════════════════════════════════════════════ */
+.app {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+
+/* ════════════════════════════════════════════
+   HEADER
+════════════════════════════════════════════ */
+.header {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--gold-line);
+  background: rgba(8,8,14,0.92);
+  backdrop-filter: blur(24px);
+  position: relative; z-index: 10;
+}
+
+.header::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.6;
+}
+
+.logo-group { display: flex; align-items: center; gap: 16px; cursor: pointer; }
+.logo-mark { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+.logo-mark svg { width: 44px; height: 44px; }
+
+.logo-text { display: flex; flex-direction: column; }
+.logo-text .brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--cream); line-height: 1; text-transform: uppercase;
+}
+.logo-text .tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; letter-spacing: 0.28em; color: var(--gold);
+  text-transform: uppercase; margin-top: 3px;
+}
+
+.header-center {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; letter-spacing: 0.2em;
+  color: rgba(240,230,204,0.4); text-transform: uppercase; font-style: italic;
+}
+
+.header-status { display: flex; align-items: center; gap: 10px; }
+
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #2ECC71; box-shadow: 0 0 8px #2ECC71;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px currentColor; }
+  50% { opacity: 0.6; box-shadow: 0 0 14px currentColor; }
+}
+
+.status-text { font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.1em; color: rgba(240,230,204,0.5); }
+
+/* ════════════════════════════════════════════
+   PRODUCT PANEL (left / showcase)
+════════════════════════════════════════════ */
+.product-panel {
+  background: var(--ink2);
+  border-left: 1px solid var(--gold-line);
+  display: flex; flex-direction: column;
+  overflow: hidden; position: relative;
+}
+
+.panel-header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid rgba(201,146,26,0.12);
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; letter-spacing: 0.1em;
+  color: var(--cream); font-style: italic;
+}
+
+.panel-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.2em; color: var(--gold);
+  text-transform: uppercase; margin-top: 4px;
+}
+
+.products-scroll {
+  flex: 1; overflow-y: auto; padding: 20px;
+  display: flex; flex-direction: column; gap: 16px;
+  scrollbar-width: thin; scrollbar-color: var(--gold-line) transparent;
+}
+
+.products-scroll::-webkit-scrollbar { width: 3px; }
+.products-scroll::-webkit-scrollbar-thumb { background: var(--gold-line); border-radius: 2px; }
+
+/* empty state */
+.empty-state {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 20px; padding: 40px 32px; text-align: center;
+  opacity: 0.4; transition: opacity 0.5s ease;
+}
+.empty-state.hidden { display: none; }
+
+.empty-icon {
+  width: 64px; height: 64px; border: 1px solid var(--gold-line);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;
+}
+.empty-icon::before {
+  content: ''; position: absolute; inset: 6px;
+  border: 1px solid var(--gold-line); border-radius: 50%;
+}
+.empty-icon svg { width: 24px; height: 24px; color: var(--gold); }
+.empty-text { font-family: 'Noto Naskh Arabic', serif; font-size: 15px; color: var(--parch); line-height: 1.7; }
+
+/* ── PRODUCT CARD ── */
+.product-card {
+  background: var(--ink3);
+  border: 1px solid rgba(201,146,26,0.15);
+  border-radius: var(--r); overflow: hidden;
+  position: relative; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: card-in 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2) { animation-delay: 0.15s; }
+.product-card:nth-child(3) { animation-delay: 0.25s; }
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.product-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+
+.product-card:hover {
+  border-color: rgba(201,146,26,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,146,26,0.2);
+}
+.product-card:hover::before { opacity: 1; }
+
+.product-img-wrap {
+  height: 180px; position: relative; overflow: hidden; background: var(--ink);
+}
+.product-img-wrap::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, var(--ink3));
+}
+.product-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); display: block;
+}
+.product-card:hover .product-img { transform: scale(1.06); }
+
+.product-badge {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  background: var(--gold); color: var(--ink);
+  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.05em; padding: 4px 10px; border-radius: 4px;
+}
+
+.product-rank {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(8,8,14,0.7); backdrop-filter: blur(8px);
+  border: 1px solid var(--gold-line);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--gold);
+}
+
+.product-body { padding: 16px 18px 18px; }
+.product-type { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.product-title { font-family: 'Noto Naskh Arabic', serif; font-size: 16px; font-weight: 600; color: var(--cream); line-height: 1.4; margin-bottom: 8px; }
+.product-angle { font-family: 'Noto Naskh Arabic', serif; font-size: 13px; color: var(--parch); line-height: 1.6; opacity: 0.75; margin-bottom: 14px; }
+
+.product-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+.product-price-group { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.product-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--cream); line-height: 1; }
+.product-price span { font-size: 12px; font-family: 'DM Sans', sans-serif; opacity: 0.6; margin-right: 2px; }
+.product-compare { font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--parch); text-decoration: line-through; opacity: 0.5; }
+
+.btn-view {
+  display: flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--gold), #B8841A);
+  color: var(--ink); font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 10px 18px; border-radius: 8px; border: none;
+  cursor: pointer; text-decoration: none; transition: all 0.3s ease; white-space: nowrap;
+}
+.btn-view:hover { background: linear-gradient(135deg, var(--gold-lt), var(--gold)); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,146,26,0.4); }
+.btn-view svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.score-bar { height: 2px; background: var(--ink); border-radius: 1px; margin-bottom: 12px; overflow: hidden; }
+.score-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); border-radius: 1px; transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+
+/* ════════════════════════════════════════════
+   CHAT PANEL
+════════════════════════════════════════════ */
+.chat-panel { display: flex; flex-direction: column; overflow: hidden; position: relative; background: var(--ink); }
+
+/* ── AGENT IDENTITY ── */
+.agent-identity {
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid rgba(201,146,26,0.1);
+  display: flex; align-items: center; gap: 16px;
+  flex-shrink: 0; position: relative;
+}
+.agent-identity::after {
+  content: ''; position: absolute; bottom: -1px; left: 40px; right: 40px;
+  height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.4;
+}
+
+.agent-avatar { width: 52px; height: 52px; position: relative; flex-shrink: 0; }
+.avatar-ring { position: absolute; inset: 0; border: 1.5px solid var(--gold); border-radius: 50%; animation: ring-spin 8s linear infinite; opacity: 0.5; }
+.avatar-ring-2 { position: absolute; inset: 5px; border: 1px solid var(--gold-line); border-radius: 50%; animation: ring-spin 5s linear infinite reverse; }
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+
+.avatar-inner {
+  position: absolute; inset: 10px;
+  background: linear-gradient(135deg, var(--gold), #8B6010);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.avatar-inner span { font-family: 'Noto Naskh Arabic', serif; font-size: 18px; font-weight: 700; color: var(--ink); }
+
+.agent-info { flex: 1; }
+.agent-name { font-family: 'Noto Naskh Arabic', serif; font-size: 18px; font-weight: 600; color: var(--cream); display: flex; align-items: center; gap: 8px; }
+.agent-name .nour-en { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; font-style: italic; color: var(--gold); opacity: 0.8; direction: ltr; }
+.agent-role { font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(212,197,160,0.55); margin-top: 3px; }
+.agent-mood { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: var(--gold-dim); border: 1px solid var(--gold-line); padding: 3px 10px; border-radius: 20px; }
+
+/* ── MESSAGES ── */
+.messages-container {
+  flex: 1; overflow-y: auto; padding: 24px;
+  display: flex; flex-direction: column; gap: 20px;
+  scrollbar-width: thin; scrollbar-color: var(--gold-line) transparent;
+}
+.messages-container::-webkit-scrollbar { width: 3px; }
+.messages-container::-webkit-scrollbar-thumb { background: var(--gold-line); border-radius: 2px; }
+
+.message {
+  display: flex; flex-direction: column; gap: 6px;
+  animation: msg-in 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+  max-width: 88%;
+}
+@keyframes msg-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.message.user { align-items: flex-start; align-self: flex-start; }
+.message.agent { align-items: flex-end; align-self: flex-end; }
+
+.message-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(212,197,160,0.35); padding: 0 4px; }
+
+.message-bubble {
+  padding: 14px 18px; border-radius: var(--r);
+  font-family: 'Noto Naskh Arabic', serif; font-size: 15px; line-height: 1.75; position: relative;
+}
+.message.user .message-bubble {
+  background: var(--smoke); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--r) var(--r) var(--r) 4px; color: rgba(240,230,204,0.85);
+}
+.message.agent .message-bubble {
+  background: var(--ink2); border: 1px solid rgba(201,146,26,0.18);
+  border-radius: var(--r) var(--r) 4px var(--r); color: var(--cream);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3); overflow: hidden;
+}
+.message.agent .message-bubble::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,146,26,0.4), transparent);
+}
+.message-time { font-family: 'DM Sans', sans-serif; font-size: 10px; color: rgba(212,197,160,0.25); padding: 0 4px; }
+
+/* ── TYPING INDICATOR ── */
+.typing-indicator { display: flex; align-items: flex-end; align-self: flex-end; gap: 8px; animation: msg-in 0.3s ease both; }
+.typing-avatar { width: 28px; height: 28px; background: linear-gradient(135deg, var(--gold), #8B6010); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; font-weight: 700; color: var(--ink); flex-shrink: 0; }
+.typing-bubble { background: var(--ink2); border: 1px solid rgba(201,146,26,0.18); border-radius: 16px 16px 4px 16px; padding: 14px 18px; display: flex; align-items: center; gap: 6px; }
+.typing-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); animation: diamond-pulse 1.2s ease-in-out infinite; opacity: 0.3; }
+.typing-diamond:nth-child(2) { animation-delay: 0.2s; }
+.typing-diamond:nth-child(3) { animation-delay: 0.4s; }
+@keyframes diamond-pulse {
+  0%, 100% { opacity: 0.2; transform: rotate(45deg) scale(0.7); }
+  50% { opacity: 1; transform: rotate(45deg) scale(1.2); }
+}
+
+/* ── INSIGHTS BAR ── */
+.insights-bar { display: flex; gap: 8px; padding: 0 24px 6px; flex-shrink: 0; overflow-x: auto; scrollbar-width: none; }
+.insights-bar::-webkit-scrollbar { display: none; }
+.insight-tag { display: flex; align-items: center; gap: 5px; background: var(--gold-dim); border: 1px solid var(--gold-line); border-radius: 20px; padding: 4px 12px; font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--gold-lt); white-space: nowrap; opacity: 0; transform: scale(0.9); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+.insight-tag.show { opacity: 1; transform: scale(1); }
+.insight-tag .dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+/* ── INPUT AREA ── */
+.input-area { padding: 20px 24px 24px; flex-shrink: 0; position: relative; }
+.input-area::before { content: ''; position: absolute; top: 0; left: 40px; right: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-line), transparent); }
+
+.input-frame {
+  position: relative; background: var(--ink2); border: 1px solid rgba(201,146,26,0.2);
+  border-radius: 20px; display: flex; align-items: flex-end; gap: 12px;
+  padding: 14px 18px; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.input-frame:focus-within { border-color: rgba(201,146,26,0.5); box-shadow: 0 0 0 3px rgba(201,146,26,0.07), 0 8px 32px rgba(0,0,0,0.4); }
+
+.chat-input {
+  flex: 1; background: transparent; border: none; outline: none; resize: none;
+  font-family: 'Noto Naskh Arabic', serif; font-size: 15px; color: var(--cream);
+  line-height: 1.6; max-height: 120px; min-height: 24px; direction: rtl;
+  caret-color: var(--gold); scrollbar-width: none;
+}
+.chat-input::-webkit-scrollbar { display: none; }
+.chat-input::placeholder { color: rgba(212,197,160,0.3); }
+
+.send-btn {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--gold), #9A6F14);
+  border: none; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative; overflow: hidden;
+}
+.send-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent); }
+.send-btn:hover { transform: scale(1.08) translateY(-1px); box-shadow: 0 6px 20px rgba(201,146,26,0.5); }
+.send-btn:active { transform: scale(0.96); }
+.send-btn svg { width: 18px; height: 18px; color: var(--ink); position: relative; z-index: 1; }
+.send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.input-hints { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.hint-chip {
+  font-family: 'Noto Naskh Arabic', serif; font-size: 12px;
+  color: var(--parch); background: var(--cream-dim);
+  border: 1px solid rgba(201,146,26,0.12); border-radius: 20px;
+  padding: 5px 14px; cursor: pointer; transition: all 0.25s ease; white-space: nowrap; opacity: 0.7;
+}
+.hint-chip:hover { border-color: var(--gold-line); background: var(--gold-dim); color: var(--cream); opacity: 1; }
+
+/* ── ERROR BANNER ── */
+.error-banner {
+  display: none; align-items: center; gap: 10px;
+  background: rgba(231,76,60,0.12); border: 1px solid rgba(231,76,60,0.3);
+  border-radius: 10px; padding: 10px 16px; margin: 0 24px 8px;
+  font-family: 'Noto Naskh Arabic', serif; font-size: 13px; color: #e74c3c;
+}
+.error-banner.show { display: flex; }
+.error-banner button { background: transparent; border: 1px solid rgba(231,76,60,0.4); border-radius: 6px; color: #e74c3c; font-family: 'DM Sans', sans-serif; font-size: 11px; padding: 3px 10px; cursor: pointer; transition: all 0.2s; margin-right: auto; }
+.error-banner button:hover { background: rgba(231,76,60,0.2); }
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+  .product-panel { display: none; }
+}
+
+/* FADE IN */
+.fade-in { animation: fade-in 0.6s ease both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</head>
+
+<body>
+
+<!-- MASHRABIYA CANVAS -->
+<canvas id="mashrabiya"></canvas>
+
+<!-- APP -->
+<div class="app fade-in" id="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-group" title="إعدادات الاتصال" onclick="showSettings()">
+      <div class="logo-mark">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="22,2 42,12 42,32 22,42 2,32 2,12" fill="none" stroke="#C9921A" stroke-width="1"/>
+          <polygon points="22,8 36,15 36,29 22,36 8,29 8,15" fill="none" stroke="#C9921A" stroke-width="0.5" opacity="0.5"/>
+          <circle cx="22" cy="22" r="7" fill="none" stroke="#C9921A" stroke-width="1"/>
+          <polygon points="22,14 24,20 30,20 25,24 27,30 22,26 17,30 19,24 14,20 20,20" fill="#C9921A" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="brand">Chic Homz</div>
+        <div class="tagline">Home · Art · Living</div>
+      </div>
+    </div>
+    <div class="header-center">مستشار الذوق الشخصي بالذكاء الاصطناعي</div>
+    <div class="header-status">
+      <div class="status-dot" id="statusDot"></div>
+      <div class="status-text" id="statusText">جاري الاتصال...</div>
+    </div>
+  </header>
+
+  <!-- PRODUCT PANEL -->
+  <section class="product-panel">
+    <div class="panel-header">
+      <div class="panel-title">المقترحات المخصصة لك</div>
+      <div class="panel-subtitle" id="productCount">في انتظار محادثتك</div>
+    </div>
+    <div id="productsScroll" class="products-scroll">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="empty-text">ابدأ محادثة مع نور<br>وستظهر هنا أفضل المقترحات<br>المخصصة لذوقك ومنزلك</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAT PANEL -->
+  <section class="chat-panel">
+
+    <!-- Agent Identity -->
+    <div class="agent-identity">
+      <div class="agent-avatar">
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring-2"></div>
+        <div class="avatar-inner"><span>ن</span></div>
+      </div>
+      <div class="agent-info">
+        <div class="agent-name">نور <span class="nour-en">· Nour</span></div>
+        <div class="agent-role">مستشار الديكور الشخصي · Chic Homz</div>
+      </div>
+      <div class="agent-mood" id="agentMood">جاهز للمساعدة</div>
+    </div>
+
+    <!-- Insight Tags -->
+    <div class="insights-bar" id="insightsBar"></div>
+
+    <!-- Error Banner -->
+    <div class="error-banner" id="errorBanner">
+      <span id="errorMsg">خطأ في الاتصال</span>
+      <button onclick="retryConnect()">إعادة المحاولة</button>
+    </div>
+
+    <!-- Messages -->
+    <div class="messages-container" id="messages">
+      <div class="message agent" style="animation-delay:0.3s">
+        <div class="message-label">نور</div>
+        <div class="message-bubble">
+          أهلاً وسهلاً! أنا نور، مستشارك الشخصي لأثاث وديكور Chic Homz 🌟<br><br>
+          بساعدك تلاقي القطعة اللي هتخلي بيتك أحسن — سواء بتجدد، بتأثث من الأول، أو بتدور على هدية مميزة.<br><br>
+          <span style="color:var(--gold-lt); font-weight:600;">قولي... إيه اللي بتدور عليه؟</span>
+        </div>
+        <div class="message-time" id="welcomeTime"></div>
+      </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="input-area">
+      <div class="input-frame">
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="إرسال">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+        <textarea id="chatInput" class="chat-input"
+          placeholder="اكتب سؤالك أو صف ما تبحث عنه..."
+          rows="1" dir="rtl"></textarea>
+      </div>
+      <div class="input-hints" id="hints">
+        <div class="hint-chip" onclick="useHint(this)">🛋️ أثاث غرفة المعيشة</div>
+        <div class="hint-chip" onclick="useHint(this)">🪞 مرايا وإكسسوارات</div>
+        <div class="hint-chip" onclick="useHint(this)">🏠 بيت جديد — ابدأ معايا</div>
+        <div class="hint-chip" onclick="useHint(this)">🎁 هدية مميزة</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- SETTINGS PANEL (click logo to open) -->
+<div id="settingsPanel" style="
+  display:none; position:fixed; inset:0; z-index:500;
+  background:rgba(8,8,14,0.9); backdrop-filter:blur(20px);
+  align-items:center; justify-content:center;
+">
+  <div style="
+    background:var(--ink2); border:1px solid var(--gold-line); border-radius:24px;
+    padding:40px; max-width:440px; width:90%; text-align:center;
+  ">
+    <div style="margin-bottom:24px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--cream);margin-bottom:8px;">إعدادات الاتصال</div>
+      <div style="font-family:'Noto Naskh Arabic',serif;font-size:14px;color:var(--parch);opacity:0.7;">اضبط بيانات الاتصال ببيك إند الوكيل</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;text-align:right;">
+      <div>
+        <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;">LangGraph Server URL</label>
+        <input id="cfgUrl" type="text" value="http://localhost:2024"
+          style="width:100%;background:var(--ink);border:1px solid var(--gold-line);border-radius:10px;padding:10px 14px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;direction:ltr;"
+          onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--gold-line)'">
+      </div>
+      <div>
+        <label style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;">Graph ID</label>
+        <input id="cfgGraph" type="text" value="chichomz_sales_agent"
+          style="width:100%;background:var(--ink);border:1px solid var(--gold-line);border-radius:10px;padding:10px 14px;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;direction:ltr;"
+          onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--gold-line)'">
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:28px;">
+      <button onclick="closeSettings()" style="
+        flex:1;background:var(--ink3);border:1px solid var(--gold-line);border-radius:12px;
+        color:var(--parch);font-family:'Noto Naskh Arabic',serif;font-size:14px;padding:12px;
+        cursor:pointer;transition:all 0.3s ease;
+      ">إغلاق</button>
+      <button onclick="applySettings()" style="
+        flex:1;background:linear-gradient(135deg,var(--gold),#9A6F14);border:none;border-radius:12px;
+        color:var(--ink);font-family:'Noto Naskh Arabic',serif;font-size:14px;font-weight:700;
+        padding:12px;cursor:pointer;transition:all 0.3s ease;
+      ">اتصال ✦</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   MASHRABIYA — Islamic geometric pattern
+═══════════════════════════════════════════ */
+function drawMashrabiya() {
+  const canvas = document.getElementById('mashrabiya');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.strokeStyle = '#C9921A';
+  ctx.lineWidth = 0.8;
+  const S = 80;
+  const cols = Math.ceil(canvas.width / S) + 2;
+  const rows = Math.ceil(canvas.height / S) + 2;
+  for (let row = -1; row < rows; row++) {
+    for (let col = -1; col < cols; col++) {
+      const x = col * S, y = row * S;
+      const cx = x + S/2, cy = y + S/2;
+      ctx.beginPath();
+      ctx.moveTo(cx, y); ctx.lineTo(x+S, cy); ctx.lineTo(cx, y+S); ctx.lineTo(x, cy);
+      ctx.closePath(); ctx.stroke();
+      const r1 = S*0.22, r2 = S*0.12, pts = 8;
+      ctx.beginPath();
+      for (let i = 0; i < pts*2; i++) {
+        const angle = (i*Math.PI)/pts - Math.PI/2;
+        const r = i%2===0 ? r1 : r2;
+        const px = cx + Math.cos(angle)*r, py = cy + Math.sin(angle)*r;
+        i===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+      }
+      ctx.closePath(); ctx.stroke();
+    }
+  }
+}
+drawMashrabiya();
+window.addEventListener('resize', drawMashrabiya);
+
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+let CONFIG = {
+  url: 'http://localhost:2024',
+  graphId: 'chichomz_sales_agent',
+};
+let threadId = null;
+let customerProfile = {};
+let isTyping = false;
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+document.getElementById('welcomeTime').textContent = getTime();
+
+document.getElementById('chatInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+document.getElementById('chatInput').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+function getTime() {
+  return new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+}
+
+/* ═══════════════════════════════════════════
+   AUTO-CONNECT ON LOAD
+═══════════════════════════════════════════ */
+let _connectAttempt = 0;
+const _MAX_ATTEMPTS = 12;
+const _RETRY_DELAYS = [1500, 2000, 2500, 3000, 3000, 4000, 4000, 5000, 5000, 5000, 5000, 5000];
+
+window.addEventListener('load', () => {
+  setTimeout(tryConnect, 1000);
+});
+
+async function tryConnect() {
+  await connectToBackend();
+  if (threadId) return; // success
+  _connectAttempt++;
+  if (_connectAttempt < _MAX_ATTEMPTS) {
+    const delay = _RETRY_DELAYS[_connectAttempt] || 5000;
+    setStatus(`جاري الاتصال... (${_connectAttempt}/${_MAX_ATTEMPTS})`, '#E8B84B');
+    setTimeout(tryConnect, delay);
+  } else {
+    setStatus('فشل الاتصال', '#E74C3C');
+    showError('تعذر الاتصال بالسيرفر على ' + CONFIG.url + '. تأكد من تشغيل python start.py');
+  }
+}
+
+async function connectToBackend() {
+  setStatus('جاري الاتصال...', '#E8B84B');
+  try {
+    const res = await fetch(`${CONFIG.url}/threads`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ metadata: { source: 'chichomz-ui' } }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    threadId = data.thread_id;
+    setStatus('متصل الآن', '#2ECC71');
+    hideError();
+  } catch (e) {
+    setStatus('غير متصل', '#E74C3C');
+    showError('تعذر الاتصال بالسيرفر على ' + CONFIG.url);
+  }
+}
+
+async function retryConnect() {
+  hideError();
+  _connectAttempt = 0;
+  await tryConnect();
+}
+
+/* ═══════════════════════════════════════════
+   SETTINGS PANEL
+═══════════════════════════════════════════ */
+function showSettings() {
+  document.getElementById('cfgUrl').value = CONFIG.url;
+  document.getElementById('cfgGraph').value = CONFIG.graphId;
+  document.getElementById('settingsPanel').style.display = 'flex';
+}
+function closeSettings() {
+  document.getElementById('settingsPanel').style.display = 'none';
+}
+function applySettings() {
+  CONFIG.url = document.getElementById('cfgUrl').value.trim().replace(/\/$/, '');
+  CONFIG.graphId = document.getElementById('cfgGraph').value.trim();
+  threadId = null;
+  closeSettings();
+  connectToBackend();
+}
+
+/* ═══════════════════════════════════════════
+   SEND MESSAGE
+═══════════════════════════════════════════ */
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text || isTyping) return;
+
+  if (!threadId) {
+    showError('لم يتم الاتصال بعد. جاري المحاولة...');
+    await connectToBackend();
+    if (!threadId) return;
+  }
+
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('hints').style.display = 'none';
+
+  appendMessage('user', text);
+  showTyping();
+  hideError();
+
+  await liveResponse(text);
+}
+
+function useHint(el) {
+  const text = el.textContent.replace(/^[^\s]+\s/, '');
+  document.getElementById('chatInput').value = text;
+  document.getElementById('chatInput').dispatchEvent(new Event('input'));
+  document.getElementById('chatInput').focus();
+}
+
+/* ═══════════════════════════════════════════
+   LIVE RESPONSE — LangGraph SSE streaming
+═══════════════════════════════════════════ */
+async function liveResponse(text) {
+  try {
+    const body = {
+      assistant_id: CONFIG.graphId,
+      input: {
+        messages: [{ role: 'human', content: text }],
+        raw_query: text,
+      },
+      config: { configurable: { thread_id: threadId } },
+      stream_mode: ['values'],
+    };
+
+    const res = await fetch(`${CONFIG.url}/threads/${threadId}/runs/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let agentResponse = '';
+    let newProfile = null;
+    let newProducts = null;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop(); // keep incomplete last line
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (!raw || raw === '[DONE]') continue;
+
+        try {
+          const data = JSON.parse(raw);
+
+          // ── Extract last AI message ──
+          if (data.messages && Array.isArray(data.messages)) {
+            for (let i = data.messages.length - 1; i >= 0; i--) {
+              const m = data.messages[i];
+              const mtype = m.type || m._type || '';
+              if (mtype === 'ai' || mtype === 'AIMessage') {
+                const content = extractContent(m.content);
+                if (content) { agentResponse = content; break; }
+              }
+            }
+          }
+
+          // ── Customer profile ──
+          if (data.customer_profile && typeof data.customer_profile === 'object') {
+            newProfile = data.customer_profile;
+          }
+
+          // ── Ranked products ──
+          if (Array.isArray(data.ranked_products) && data.ranked_products.length > 0) {
+            newProducts = data.ranked_products;
+          }
+
+          // ── Interrupt (clarification question) ──
+          if (data.__interrupt__) {
+            const interrupts = Array.isArray(data.__interrupt__)
+              ? data.__interrupt__
+              : [data.__interrupt__];
+            const q = interrupts[0]?.value;
+            if (q && typeof q === 'string') agentResponse = q;
+          }
+
+        } catch (_) { /* skip malformed */ }
+      }
+    }
+
+    hideTyping();
+
+    if (agentResponse) {
+      appendMessage('agent', agentResponse);
+    } else {
+      appendMessage('agent', 'عذراً، لم أتمكن من الرد في الوقت الحالي. حاول مرة تانية.');
+    }
+
+    if (newProfile) { customerProfile = newProfile; updateProfileUI(newProfile); }
+    if (newProducts) renderProducts(newProducts);
+
+  } catch (e) {
+    console.error('liveResponse error:', e);
+    hideTyping();
+    appendMessage('agent', 'عذراً، في مشكلة في الاتصال. جرب تاني أو اتصل بالدعم.');
+    setStatus('خطأ', '#E74C3C');
+    showError('خطأ في الاتصال: ' + e.message);
+  }
+}
+
+function extractContent(content) {
+  if (typeof content === 'string') return content;
+  if (Array.isArray(content)) {
+    return content
+      .map(b => (typeof b === 'string' ? b : (b.text || b.content || '')))
+      .join('');
+  }
+  return '';
+}
+
+/* ═══════════════════════════════════════════
+   UI — STATUS
+═══════════════════════════════════════════ */
+function setStatus(text, color) {
+  const dot = document.getElementById('statusDot');
+  dot.style.background = color;
+  dot.style.boxShadow = `0 0 8px ${color}`;
+  dot.style.color = color;
+  document.getElementById('statusText').textContent = text;
+}
+
+function showError(msg) {
+  document.getElementById('errorMsg').textContent = msg;
+  document.getElementById('errorBanner').classList.add('show');
+}
+function hideError() {
+  document.getElementById('errorBanner').classList.remove('show');
+}
+
+/* ═══════════════════════════════════════════
+   UI — MESSAGES
+═══════════════════════════════════════════ */
+function appendMessage(role, text) {
+  const container = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `message ${role}`;
+
+  const label = document.createElement('div');
+  label.className = 'message-label';
+  label.textContent = role === 'agent' ? 'نور' : 'أنت';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'message-bubble';
+  bubble.innerHTML = formatMessage(text);
+
+  const time = document.createElement('div');
+  time.className = 'message-time';
+  time.textContent = getTime();
+
+  div.appendChild(label);
+  div.appendChild(bubble);
+  div.appendChild(time);
+  container.appendChild(div);
+
+  requestAnimationFrame(() => {
+    container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+  });
+}
+
+function formatMessage(text) {
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gold-lt)">$1</strong>')
+    .replace(/✦/g, '<span style="color:var(--gold)">✦</span>')
+    .replace(/\n/g, '<br>');
+}
+
+function showTyping() {
+  isTyping = true;
+  document.getElementById('sendBtn').disabled = true;
+  updateMood('يفكر...');
+  const container = document.getElementById('messages');
+  const typing = document.createElement('div');
+  typing.className = 'typing-indicator';
+  typing.id = 'typingIndicator';
+  typing.innerHTML = `
+    <div class="typing-bubble">
+      <div class="typing-diamond"></div>
+      <div class="typing-diamond"></div>
+      <div class="typing-diamond"></div>
+    </div>
+    <div class="typing-avatar">ن</div>
+  `;
+  container.appendChild(typing);
+  container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+}
+
+function hideTyping() {
+  isTyping = false;
+  document.getElementById('sendBtn').disabled = false;
+  updateMood('جاهز للمساعدة');
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+function updateMood(text) {
+  document.getElementById('agentMood').textContent = text;
+}
+
+/* ═══════════════════════════════════════════
+   UI — PRODUCTS
+═══════════════════════════════════════════ */
+function renderProducts(products) {
+  const scroll = document.getElementById('productsScroll');
+  const empty  = document.getElementById('emptyState');
+  if (empty) empty.classList.add('hidden');
+  document.getElementById('productCount').textContent = `${products.length} مقترح مخصص لك ✦`;
+
+  const existing = scroll.querySelectorAll('.product-card');
+  existing.forEach(c => {
+    c.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    c.style.opacity = '0'; c.style.transform = 'translateY(-10px)';
+    setTimeout(() => c.remove(), 280);
+  });
+
+  setTimeout(() => {
+    products.forEach((p, i) => scroll.appendChild(buildProductCard(p, i+1)));
+  }, 300);
+}
+
+function buildProductCard(p, rank) {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  const discount = p.discount_pct > 0 ? `<div class="product-badge">خصم ${p.discount_pct}%</div>` : '';
+  const compare  = p.compare_at_price ? `<div class="product-compare">${Number(p.compare_at_price).toLocaleString('ar-EG')} جنيه</div>` : '';
+  const score    = Math.min(100, Math.max(0, Number(p.score) || 80));
+  const angle    = p.sales_angle ? `<div class="product-angle">${escHtml(p.sales_angle)}</div>` : '';
+  const imgFallback = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect fill='%231A1A26' width='400' height='200'/%3E%3C/svg%3E";
+
+  card.innerHTML = `
+    <div class="product-img-wrap">
+      <img class="product-img" src="${escAttr(p.cover || imgFallback)}" alt="${escAttr(p.title)}"
+        onerror="this.src='${imgFallback}'" loading="lazy">
+      ${discount}
+      <div class="product-rank">${rank}</div>
+    </div>
+    <div class="product-body">
+      <div class="product-type">${escHtml(p.product_type || 'ديكور')}</div>
+      <div class="score-bar"><div class="score-fill" style="width:${score}%"></div></div>
+      <div class="product-title js-title">${escHtml(p.title)}</div>
+      ${angle}
+      <div class="product-footer">
+        <div class="product-price-group">
+          <div class="product-price"><span>ج</span>${Number(p.price).toLocaleString('ar-EG')}</div>
+          ${compare}
+        </div>
+        <a class="btn-view" href="${escAttr(p.url || '#')}" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          مشاهدة
+        </a>
+      </div>
+    </div>
+  `;
+
+  // Click title → pre-fill input
+  card.querySelector('.js-title').addEventListener('click', () => {
+    const inp = document.getElementById('chatInput');
+    inp.value = `عايز أعرف أكتر عن: ${p.title}`;
+    inp.dispatchEvent(new Event('input'));
+    inp.focus();
+  });
+  return card;
+}
+
+function escHtml(s) {
+  return String(s || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) { return escHtml(s); }
+
+/* ═══════════════════════════════════════════
+   UI — PROFILE INSIGHTS
+═══════════════════════════════════════════ */
+const INSIGHT_ICONS = {
+  emotional_state: { excited:'🔥', curious:'🔍', price_sensitive:'💰', hesitant:'🤔', decided:'✅' },
+  room_type:       { bedroom:'🛏️', living_room:'🛋️', dining_room:'🍽️', bathroom:'🚿', entrance:'🚪', office:'💼' },
+  occasion:        { new_home:'🏠', wedding:'💍', gift:'🎁', renovation:'🔨' },
+  style_preference:{ modern:'⬛', classic:'🏛️', boho:'🌿', minimalist:'◻️' },
+};
+const LABELS = {
+  emotional_state: { excited:'متحمس', curious:'فضولي', price_sensitive:'حساس للسعر', hesitant:'متردد', decided:'جاهز للشراء' },
+  room_type:       { bedroom:'غرفة نوم', living_room:'معيشة', dining_room:'سفرة', bathroom:'حمام', entrance:'مدخل', office:'مكتب' },
+  occasion:        { new_home:'بيت جديد', wedding:'جواز', gift:'هدية', renovation:'تجديد' },
+  style_preference:{ modern:'مودرن', classic:'كلاسيك', boho:'بوهو', minimalist:'مينيمال' },
+};
+
+function updateProfileUI(profile) {
+  const bar = document.getElementById('insightsBar');
+  bar.innerHTML = '';
+  const fields = ['emotional_state','room_type','occasion','style_preference'];
+  let shown = 0;
+  fields.forEach(field => {
+    const val = profile[field];
+    if (!val || ['undefined','neutral','unknown'].includes(val)) return;
+    const icon  = (INSIGHT_ICONS[field] || {})[val] || '•';
+    const label = (LABELS[field] || {})[val] || val;
+    const tag = document.createElement('div');
+    tag.className = 'insight-tag';
+    tag.innerHTML = `<div class="dot"></div> ${icon} ${label}`;
+    bar.appendChild(tag);
+    setTimeout(() => tag.classList.add('show'), shown++ * 100 + 100);
+  });
+
+  if (profile.color_signals && profile.color_signals.length > 0) {
+    const tag = document.createElement('div');
+    tag.className = 'insight-tag';
+    tag.innerHTML = `<div class="dot"></div> 🎨 ${profile.color_signals.slice(0,3).join('، ')}`;
+    bar.appendChild(tag);
+    setTimeout(() => tag.classList.add('show'), shown * 100 + 100);
+  }
+}
+</script>
+</body>
+</html>
