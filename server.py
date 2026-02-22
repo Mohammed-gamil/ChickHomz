@@ -22,7 +22,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.types import Command
@@ -194,6 +194,46 @@ async def stream_run(thread_id: str, request: Request):
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+
+# ── Serve React frontend (must come after all API routes) ─────────────────────
+_DIST = os.path.join(os.path.dirname(__file__), "frontend", "dist")
+
+# Explicit MIME types (Windows registry often has wrong values)
+_MIME_TYPES = {
+    ".js": "application/javascript",
+    ".mjs": "application/javascript",
+    ".css": "text/css",
+    ".html": "text/html",
+    ".json": "application/json",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
+    ".woff": "font/woff",
+    ".woff2": "font/woff2",
+    ".ttf": "font/ttf",
+}
+
+
+def _get_mime(path: str) -> str:
+    ext = os.path.splitext(path)[1].lower()
+    return _MIME_TYPES.get(ext, "application/octet-stream")
+
+
+if os.path.isdir(_DIST):
+    @app.get("/")
+    async def serve_index():
+        return FileResponse(os.path.join(_DIST, "index.html"), media_type="text/html")
+
+    @app.get("/{full_path:path}")
+    async def serve_static(full_path: str):
+        file_path = os.path.join(_DIST, full_path)
+        if os.path.isfile(file_path):
+            return FileResponse(file_path, media_type=_get_mime(file_path))
+        # SPA fallback
+        return FileResponse(os.path.join(_DIST, "index.html"), media_type="text/html")
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────

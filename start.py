@@ -7,7 +7,7 @@ Next runs : starts LangGraph dev server + static Chat UI simultaneously
   Backend  →  http://localhost:2024   (server.py — FastAPI/uvicorn)
   Frontend →  http://localhost:3000   (Python static file server → frontend/index.html)
 """
-import os, sys, subprocess, pathlib, threading, functools, http.server, socketserver
+import os, sys, subprocess, pathlib
 
 ROOT      = pathlib.Path(__file__).parent
 ENV_FILE  = ROOT / ".env"
@@ -69,42 +69,27 @@ def ensure_faiss_index(env):
     log("✅", "FAISS index built and saved to faiss_index/")
 
 # ── 4. launch both servers ─────────────────────────────────────────────────
-def serve_frontend():
-    """Serve frontend/index.html via Python's built-in HTTP server on port 3000."""
-    handler = functools.partial(
-        http.server.SimpleHTTPRequestHandler,
-        directory=str(FRONTEND),
-    )
-    # suppress request logs to stdout
-    handler.log_message = lambda *_: None
-    with socketserver.TCPServer(("", 3000), handler) as httpd:
-        httpd.serve_forever()
-
 def launch():
-    log("🚀", "Starting dev server  →  http://localhost:2024")
-    log("💬", "Starting Chat UI               →  http://localhost:3000")
-    log("   ", "Press Ctrl+C to stop both.\n")
+    log("🚀", "Starting Chic Homz  →  http://localhost:2024")
+    log("   ", "Press Ctrl+C to stop.\n")
 
-    # Start FastAPI server in background
+    # Start FastAPI server (serves both API + frontend from dist/)
     backend = subprocess.Popen(
         [sys.executable, str(ROOT / "server.py")],
         cwd=str(ROOT),
     )
 
-    # Start static file server in daemon thread
-    fe_thread = threading.Thread(target=serve_frontend, daemon=True)
-    fe_thread.start()
-    log("✅", "Chat UI ready  →  http://localhost:3000")
+    log("✅", "Server ready  →  http://localhost:2024")
 
-    # Open the custom UI after a short init delay
+    # Open the UI after a short init delay
     import webbrowser, time
     time.sleep(2)
-    webbrowser.open("http://localhost:3000")
+    webbrowser.open("http://localhost:2024")
 
     try:
         backend.wait()
     except KeyboardInterrupt:
-        log("🛑", "Stopping servers...")
+        log("🛑", "Stopping server...")
     finally:
         backend.terminate()
         try:
