@@ -1,7 +1,8 @@
 import React from 'react'
 import MessageBubble from './MessageBubble'
+import HITLPanel from './HITLPanel'
 
-export default function ChatArea({ messages, loading, chatEndRef, dark }) {
+export default function ChatArea({ messages, loading, chatEndRef, dark, hitlPending, onApprove, onReject }) {
   const formatTime = (d) => {
     if (!d) return ''
     const h = d.getHours()
@@ -38,11 +39,52 @@ export default function ChatArea({ messages, loading, chatEndRef, dark }) {
         </span>
       </div>
 
-      {messages.map((msg, i) => (
-        <MessageBubble key={i} msg={msg} dark={dark} time={formatTime(msg.time)} />
-      ))}
+      {messages.map((msg, i) => {
+        // System messages (HITL approve/reject confirmations)
+        if (msg.role === 'system') {
+          return (
+            <div
+              key={i}
+              className="message-anim"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                padding: '4px 0',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: dark ? '#aaa' : '#777',
+                  background: dark ? '#222' : '#f0f0f0',
+                  padding: '6px 16px',
+                  borderRadius: 999,
+                  border: `1px solid ${dark ? '#333' : '#ddd'}`,
+                }}
+              >
+                {msg.text}
+              </span>
+            </div>
+          )
+        }
 
-      {loading && (
+        return (
+          <MessageBubble key={i} msg={msg} dark={dark} time={formatTime(msg.time)} />
+        )
+      })}
+
+      {/* HITL Review Panel */}
+      {hitlPending && (
+        <HITLPanel
+          data={hitlPending}
+          dark={dark}
+          onApprove={onApprove}
+          onReject={onReject}
+        />
+      )}
+
+      {loading && !hitlPending && (
         <div className="message-anim" style={{ display: 'flex', alignItems: 'flex-end', gap: 8 }}>
           <div
             style={{

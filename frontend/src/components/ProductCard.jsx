@@ -3,10 +3,19 @@ import React from 'react'
 export default function ProductCard({ product, dark }) {
   const border = dark ? '#2a2a2a' : '#e5e5e5'
   const imageUrl = product.cover || product.image_url || ''
-  const productUrl = product.url || (product.handle ? `https://chickhomz.com/products/${product.handle}` : '#')
+  const productUrl = product.url || (product.handle ? `https://chichomz.com/products/${product.handle}` : '#')
 
+  const displayTitle = product.clean_title || product.title || ''
   const hasDiscount = product.discount_pct > 0
-  const originalPrice = product.compare_price > 0 ? product.compare_price : null
+  const originalPrice = product.compare_at_price || product.compare_price || 0
+  const dimensions = product.dimensions || ''
+
+  // Detect delivery/custom order from tags or text
+  const text = (product.text || '').toLowerCase()
+  const tagsRaw = product.tags || ''
+  const tags = (Array.isArray(tagsRaw) ? tagsRaw.join(' ') : String(tagsRaw)).toLowerCase()
+  const isCustomOrder = tags.includes('custom') || text.includes('تصنيع حسب الطلب') || text.includes('custom order')
+  const hasFreeDelivery = tags.includes('free delivery') || text.includes('توصيل مجاني') || text.includes('free delivery')
 
   return (
     <div
@@ -40,7 +49,7 @@ export default function ProductCard({ product, dark }) {
         {imageUrl ? (
           <img
             src={imageUrl}
-            alt={product.title}
+            alt={displayTitle}
             style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
             onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
             onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -79,6 +88,25 @@ export default function ProductCard({ product, dark }) {
             -{product.discount_pct}%
           </div>
         )}
+
+        {/* Custom order badge */}
+        {isCustomOrder && (
+          <div
+            style={{
+              position: 'absolute',
+              top: 8,
+              left: 8,
+              background: '#7C4DFF',
+              color: '#fff',
+              fontSize: 10,
+              fontWeight: 700,
+              padding: '2px 8px',
+              borderRadius: 999,
+            }}
+          >
+            تصنيع حسب الطلب
+          </div>
+        )}
       </div>
 
       {/* Product type tag */}
@@ -103,22 +131,36 @@ export default function ProductCard({ product, dark }) {
             overflow: 'hidden',
           }}
         >
-          {product.title}
+          {displayTitle}
         </h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           <span style={{ fontSize: 14, fontWeight: 700, color: '#C9921A' }}>
             {product.price?.toLocaleString('ar-EG')}
           </span>
           <span style={{ fontSize: 11, color: '#8A94A0' }}>ج.م</span>
-          {originalPrice && originalPrice > product.price && (
+          {originalPrice > 0 && originalPrice > product.price && (
             <span
               style={{ fontSize: 11, color: '#8A94A0', textDecoration: 'line-through' }}
             >
-              {originalPrice.toLocaleString('ar-EG')}
+              {Number(originalPrice).toLocaleString('ar-EG')}
             </span>
           )}
         </div>
       </div>
+
+      {/* Dimensions */}
+      {dimensions && (
+        <p style={{ fontSize: 11, color: dark ? '#888' : '#999', marginBottom: 4 }}>
+          📐 {dimensions}
+        </p>
+      )}
+
+      {/* Delivery badge */}
+      {hasFreeDelivery && (
+        <p style={{ fontSize: 11, color: '#4CAF50', fontWeight: 600, marginBottom: 4 }}>
+          🚚 توصيل مجاني
+        </p>
+      )}
 
       {/* CTA */}
       <a

@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductCard from './ProductCard'
+import MarkdownText from './MarkdownText'
 
 export default function MessageBubble({ msg, dark, time }) {
   const isUser = msg.role === 'user'
@@ -61,8 +62,14 @@ export default function MessageBubble({ msg, dark, time }) {
               width: 'fit-content',
             }}
           >
-            <p style={{ fontSize: 14, lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{msg.text}</p>
-            {msg.streaming && (
+            {msg.progressText && !msg.text ? (
+              <p style={{ fontSize: 13, lineHeight: 1.7, color: dark ? '#aaa' : '#888', fontStyle: 'italic' }}>
+                {msg.progressText}
+              </p>
+            ) : (
+              <MarkdownText text={msg.text} dark={dark} />
+            )}
+            {msg.streaming && !msg.text && (
               <div style={{ display: 'flex', gap: 4, marginTop: 8, alignItems: 'center' }}>
                 <span className="typing-dot" style={{ width: 6, height: 6 }} />
                 <span className="typing-dot" style={{ width: 6, height: 6 }} />
